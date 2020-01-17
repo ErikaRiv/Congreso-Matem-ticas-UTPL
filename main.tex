@@ -65,7 +65,6 @@
 \begin{frame}
 \begin{itemize}
     \item In this sense, the purpose is to develop a methodology, under the Bayesian paradigm, allowing predictions to be made of the total future amounts of claims in order to determine the rate of premiums using a Bayesian hierarchical structure.
-    \item According to Migon and Moura (2005), the total of claims is related to the insured population and the number of claims of that population during a given period of time.
     \item The people insured in different age groups have different patterns in the frequency and severity of the reported claims
     \item It is introduced an additional category with the idea of being able to describe the regions of residence of the insured. 
     \item This spatial factor comes to represent the combined random effect of many elements on the severity and frequency of claims. 
@@ -74,16 +73,6 @@
 
 %---------------------------------------------------------------------------------------------
 
-\section{Presentation of the Problem}
-%--------------------------------------------------------------
-\begin{frame}{Presentation of the Problem}
-\begin{itemize}
-    \item Estimate the total number of claims in a specific category under a hierarchical Bayesian structure in a given unit of time that takes into account the insured population, classified according to age, adding a spatial factor that represents the region of residence. 
-    \item Under the Bayesian paradigm, the Markov Chain Monte Carlo (MCMC) methods will be used to estimate the parameters of the model from the distributions posterior to each one of them, taking into account the a priori distributions.
-    \item Finally, calculate the value of the premiums using different premium principles so that the value of the premium assigned to each insured can be obtained by diving the total value of the premiums by the insured population.
-\end{itemize}
-\end{frame}
-%--------------------------------------------------------------
 \section{Objectives}
 %--------------------------------------------------------------
 \begin{frame}{Objectives}
@@ -94,7 +83,6 @@
     \begin{itemize}
         \item Categorize the insured population by age classes in a specific unit of time. Add a spatial factor corresponding to the region of residence that represents the combined random effects of elements that influence the characterization of the claims.
 	\item Implement a Markov Chain Monte Carlo (MCMC) algorithm that allows for the estimation of each of the parameters of the proposed model using a priori knowledge.
-	\item Based on the number of estimated claims, calculate the value of the premiums according to the different premium principles. 
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -147,12 +135,7 @@ where
 \end{frame}
 %--------------------------------------------------------------
 \begin{frame}{Priori Distributions}
-\begin{align*}
-\lambda_{a}&\sim Gamm(\alpha_{\lambda},\beta_{\lambda})\\
-\theta_{a}&\sim Gamm(\alpha_{\theta},\beta_{\theta})\\
-\kappa_{a}&\sim Gamm(\alpha_{	\kappa},\beta_{	\kappa})
-\end{align*}
-These distributions are independent with $\alpha_{\lambda},\beta_{\lambda},\alpha_{\theta},\beta_{\theta},\alpha_{	\kappa},\beta_{	\kappa}$ non-negative amounts.
+
 \begin{enumerate}[a)]
 	\item Distributions that describe the value of the claims, the number of claims and the insured population:
 	\begin{align*}
@@ -185,7 +168,7 @@ These distributions are independent with $\alpha_{\lambda},\beta_{\lambda},\alph
 	0,\quad &\textrm{otherwise}
 	\end{matrix}\right.
 	\end{align*}
-	    
+	    These distributions are independent with $\alpha_{\lambda},\beta_{\lambda},\alpha_{\theta},\beta_{\theta},\alpha_{	\kappa},\beta_{	\kappa}$ non-negative amounts.
 \end{enumerate}
     
 \end{frame}
@@ -258,7 +241,7 @@ So that,
 \end{frame}
 %--------------------------------------------------------------
 \section{Simulation Studies and Model Fitting}
-\begin{frame}{}
+\begin{frame}{Model Fitting}
     It is assumed that: \\
 \begin{itemize}
 	\item \textbf{Claim Frecuency Parameters}
@@ -271,23 +254,12 @@ So that,
 		\item $\theta_{a}\sim Gamma(400,10000)$ for any $a=1,2,...,7$ 
 	\end{itemize}
 	\item \textbf{Population Parameters}
-	\begin{itemize}
-		\item $\beta_{0}=20$
-		\item $\beta_{1}=30$
-		\item $\beta_{2}=0.015$
-		\item $\eta\sim Pareto(1,1)$	
-	\end{itemize}
-\end{itemize}
-\end{frame}
-%--------------------------------------------------------------
-\begin{frame}{Model Fitting}
-    The priors are made as follows:
 \begin{align*}
     \beta_0&\sim N(20, 10^4)\\
     \beta_1&\sim N(30, 10^4)\\
     \beta_2&\sim N(0.015, 10^2)
 \end{align*}
-For all other hyperparameters, the priors which contain little information are presented as follows:
+\item For all other hyperparameters, the priors which contain little information are presented as follows:
 \begin{align*}
     \tau,\alpha_\lambda,\beta_\lambda,\alpha_\theta,\beta_\theta&\sim Gamma(0.001,0.001),\\
     \tau_{\varepsilon_0}&\sim Gamma(1,10000),\\
@@ -295,7 +267,10 @@ For all other hyperparameters, the priors which contain little information are p
     \sigma&\sim Gamma(1,0.005),\\
     \eta&\sim Pareto(1,1).
 \end{align*}
+\end{itemize}
+
 \end{frame}
+%--------------------------------------------------------------
 
 \begin{frame}{Results}
 \begin{figure}
@@ -359,7 +334,102 @@ For all other hyperparameters, the priors which contain little information are p
 \end{frame}
 
 \section{Predictions and Premium Determination}
-\begin{frame}{Frame Title}
-    
+\begin{frame}{Predictions}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth ]{M21_1.png}
+    \caption{Prediction of Insured Population for $21st$ Time Unit - Region $1$ - Age classes $1,2, 3$ and $4$}
+    \label{predictionM1}
+\end{figure}
 \end{frame}
+
+\begin{frame}{Predictions}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth ]{N21_1.png}
+    \caption{Prediction of Number of Claims for $21st$ Time Unit - Region $1$ - Age classes $1,2, 3$ and $4$}
+    \label{predictionN1}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Predictions}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth ]{N_pred_REGION1.png}
+    \caption{Claim Number with Prediction for all Age Classes - Region 1 }
+    \label{predictionN_REGION1}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Predictions}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth ]{N_pred_AGE1&4_REGION1.png}
+    \caption{Claim Number with Prediction for Region 1 - Age Groups 1 and 4 }
+    \label{predictionN_AGE1and4}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Predictions}
+   \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth ]{X_21_1.png}
+    \caption{Prediction of Total Claim Amount for $21st$ Time Unit - Region $1$ - Age classes $1,2, 3$ and $4$}
+    \label{predictionX1}
+\end{figure} 
+\end{frame}
+
+\begin{frame}{Predictions}
+   \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth ]{Average_claim_amount_REGION1.png}
+    \caption{Average Amount Per Claim with Prediction in Region 2 - All Age Groups  }
+    \label{predictionX_average_region2}
+\end{figure} 
+\end{frame}
+\begin{frame}{Statistical Predictions Summary}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{summary2.png}
+        \caption{Statistical Prediction Summary of Claim Number and Total Claim Amount for $21st$ Time Unit}
+        \label{fig:my_label}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Premiums Determination}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{Premiums.png}
+        \caption{Total Premiums for $21^{st}$ Time Unit in Region 1 Using Predicted Results}
+        \label{fig:my_label}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Premiums Determination}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{PolicyHolder.png}
+        \caption{Premium Per Policyholder for $21^{st}$ Time Unit in Region 1}
+        \label{fig:my_label}
+    \end{figure}
+\end{frame}
+\section{Conclusions}
+\begin{frame}{Conclusions}
+    \begin{itemize}
+        \item It is possible to achieve a prediction of the total amount of claims under a Bayesian hierarchical framework. 
+        \item The prediction of future claims plays an important role in the measurement of risk for health insurance providers therefore it is a primary issue. 
+        \item Different patterns are presented in the frequency and severity of the claim reported in different age classes of the insured. 
+        \item The proposed model introduces one more category, the spatial factor independent of the existing age classification, to describe the regions of the insured's residence. 
+     \item The traces in all studies show signs of convergence.
+     \item Predictions are made for the unit of time 21, which includes the insured population, the number of claims and the amounts of the claims after generating the values of true parameters.
+     \item Premiums can be calculated under various premium principles, depending on the expected claim amounts.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\centering
+    \textbf{Thank you all!}
+\end{frame}
+
 \end{document}
