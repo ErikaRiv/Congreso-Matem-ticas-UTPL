@@ -1,42 +1,6 @@
 \documentclass[10pt]{beamer} %
 \usetheme{Boadilla}
 \usecolortheme{beaver}
-\usepackage[utf8]{inputenc} % File coding uses utf8
-\usepackage{amsmath} % Extra commands for math
-\usepackage{algpseudocode}
-\usepackage{amssymb} % Math symbols
-\usepackage{graphicx} % Include images in LaTeX
-\usepackage{color} % Coloring text
-\usepackage{verbatim}
-\usepackage{caption,booktabs}
-\usepackage{subfigure} % Manage multiple figures
-\usepackage{float} % Allow you to use [H] specifier to force the position of the images
-\usepackage{capt-of} % Defines a command \captionof for putting a caption to something that’s not a float.
-\usepackage{sidecap} % Defines environments called SCfigure and SCtable (analogous to figure and table) to typeset captions sideways
-	\sidecaptionvpos{figure}{c} % Alignment
-\usepackage{caption} % to customize the captions in floating environments like figure and table
-\usepackage{commath} % Mathematics typesetting support
-\usepackage{lscape}
-\usepackage{longtable}
-\usepackage{cancel} % Place lines through maths formulae
-\usepackage{anysize} % to set up document margins
-\marginsize{2.5cm}{2.5cm}{2.5cm}{2.5cm} % Left, right, up, down
-\usepackage{appendix} %Extra control of appendices
-\usepackage{tikz}
-\usetikzlibrary{mindmap}
-\usepackage{setspace}  % Espacio entre filas
-\usepackage{enumitem}  % Espacios entre itemize
-\usepackage{multirow}  % Combinar filas
-\usepackage[many]{tcolorbox} % Para insertar código
-\usepackage{tikz}
-\usetikzlibrary{mindmap,trees}
-% Refereces as links with colors
-\usepackage[colorlinks=true,plainpages=true,citecolor=blue,linkcolor=blue]{hyperref}
-
-% Header and Footer
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
 \usepackage[spanish]{babel}
 \usepackage[utf8x]{inputenc}
 \usefonttheme{professionalfonts}
@@ -52,7 +16,6 @@
 \usepackage{listings}
 \usepackage{adjustbox}
 \newtheorem{Teo}{Teorema}
-\newtheorem{prop}{{\it Proposition}}[chapter]
 \setbeamertemplate{itemize item}{\color{red}$\blacksquare$}
 \usepackage{hyperref}
 \title{avance1}
@@ -90,7 +53,7 @@
 \frametitle[9pt]{Introduction}
 \begin{itemize}
     \item Insurance companies estimate the risk models to predict the magnitude of the claims and thus be able to determine the premiums that must be paid to the insured
-    \item For insurance companies, it is fundamental to be able to foresee the evolution of claims and, consequently, to be able to facilitate decision- making regarding the value that premiums should have.
+
     \item Pricing actuaries must use past information to develop probabilistic models that allow them to model the most important uncertainties involved in the process of losses. 
     \item Insurers must establish a statistical control model that allows for the reduction of unnecessary expenses
     \item Bayesian statistics allows us to include the experience of the experts through the preliminary information that is reflected in the choice of the a priori distributions that each of the parameters will have.
@@ -101,7 +64,7 @@
 %------------------------------------------------------------------------------------
 \begin{frame}
 \begin{itemize}
-    \item In this sense, the purpose is to develop a methodology, under the Bayesian paradigm, allowing predictions to be made of the total future amounts of claims in in order to determine the rate of premiums using a Bayesian hierarchical structure.
+    \item In this sense, the purpose is to develop a methodology, under the Bayesian paradigm, allowing predictions to be made of the total future amounts of claims in order to determine the rate of premiums using a Bayesian hierarchical structure.
     \item According to Migon and Moura (2005), the total of claims is related to the insured population and the number of claims of that population during a given period of time.
     \item The people insured in different age groups have different patterns in the frequency and severity of the reported claims
     \item It is introduced an additional category with the idea of being able to describe the regions of residence of the insured. 
@@ -309,16 +272,16 @@ So that,
 	\end{itemize}
 	\item \textbf{Population Parameters}
 	\begin{itemize}
-		\item $\beta_{0}=50$
-		\item $\beta_{1}=20$
-		\item $\beta_{2}=0.075$
+		\item $\beta_{0}=20$
+		\item $\beta_{1}=30$
+		\item $\beta_{2}=0.015$
 		\item $\eta\sim Pareto(1,1)$	
 	\end{itemize}
 \end{itemize}
 \end{frame}
 %--------------------------------------------------------------
 \begin{frame}{Model Fitting}
-    the priors are made as follows:
+    The priors are made as follows:
 \begin{align*}
     \beta_0&\sim N(20, 10^4)\\
     \beta_1&\sim N(30, 10^4)\\
@@ -337,11 +300,66 @@ For all other hyperparameters, the priors which contain little information are p
 \begin{frame}{Results}
 \begin{figure}
     \centering
-    \includegraphics[width=1\textwidth]{Tab1.png}
-    \caption{Compilation time of the Gibbs sampler algorithm}
-    \label{fig:my_label}
+    \includegraphics[width=0.75\textwidth]{Tab1.png}
+    \caption{Compilation time of Gibbs sampler algorithm}
+    \label{fig:TAB1}
 \end{figure}
-
 \end{frame}
 
+\begin{frame}{Results}
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Lambda1.JPG}
+    \caption{Trace plot and the posterior distribution of $\lambda$ for $a=1,2,3,4$}
+    \label{Lambda}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth ]{Auto_cor_LAMBDA.png}
+    \caption{Autocorrelation of $\lambda$, for $a=1,..,7$}
+    \label{autocorLambda}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Beta_a01.JPG}
+    \caption{Trace plot and the posterior distribution of $\beta_0$ for $a=1,2,3,4$}
+    \label{betaa0}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth ]{L_trace.png}
+    \caption{Trace plot and the posterior distribution of $L_i$ for $i=1,2$}
+    \label{L_i}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.27\textwidth ]{Auto_cor_L.png}
+    \caption{Autocorrelation of $L_i$ for $i=1,2$}
+    \label{autocorL}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Summary}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth ]{summary1.png}
+        \caption{Statistical summary of some parameters}
+        \label{fig:summary}
+    \end{figure}
+\end{frame}
+
+\section{Predictions and Premium Determination}
+\begin{frame}{Frame Title}
+    
+\end{frame}
 \end{document}
